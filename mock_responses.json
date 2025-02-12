@@ -1,0 +1,26 @@
+{
+  "supply_chain_queries": {
+    "racks_by_si": {
+      "text": "Here's the analysis of racks built by SI:",
+      "data": [
+        {"MonthName": "24-Nov", "SI": "DEL", "MonthIndex": 120, "RacksBuilt": 16},
+        {"MonthName": "24-Nov", "SI": "ING", "MonthIndex": 120, "RacksBuilt": 1308},
+        {"MonthName": "24-Nov", "SI": "LEN", "MonthIndex": 120, "RacksBuilt": 704},
+        {"MonthName": "24-Nov", "SI": "QUAN", "MonthIndex": 120, "RacksBuilt": 370},
+        {"MonthName": "24-Nov", "SI": "WIW", "MonthIndex": 120, "RacksBuilt": 1289}
+      ],
+      "followup": "Would you like to know more about specific suppliers?"
+    },
+    "sales_by_country": {
+      "text": "Here are the top sales by country:",
+      "data": [
+        {"Country": "USA", "TotalSales": 2500000, "Percentage": "35%"},
+        {"Country": "China", "TotalSales": 1800000, "Percentage": "25%"},
+        {"Country": "Germany", "TotalSales": 1200000, "Percentage": "17%"},
+        {"Country": "Japan", "TotalSales": 900000, "Percentage": "13%"},
+        {"Country": "UK", "TotalSales": 700000, "Percentage": "10%"}
+      ],
+      "followup": "Would you like to see more detailed analysis for any specific country?"
+    }
+  }
+}
