@@ -2,7 +2,7 @@ from fastapi import APIRouter, HTTPException
 from typing import List, Dict
 from models.schemas import Thread, Message, ThreadCreate
 from helpers.threads import create_new_thread, generate_mock_response
-from helpers.messages import create_user_message, create_assistant_message, get_response_data
+from helpers.messages import create_user_message, create_assistant_message
 from helpers.common.api_helpers import load_mock_responses
 
 router = APIRouter(prefix="/threads", tags=["threads"])
@@ -41,18 +41,27 @@ async def create_message(thread_id: str, content: str, sender: str):
     # Create user message
     user_message = create_user_message(thread_id, content)
     
-    # Get response data from external API
-    api_url = "http://100.26.118.88:5000/cypherquery"
-    payload = {"query": content}
-    response_data = get_response_data(api_url, payload)
+    # Load mock responses
+    mock_data = load_mock_responses()
     
-    # Create AI message
-    ai_message = create_assistant_message(thread_id, response_data["content"])
+    # Generate mock response based on user query
+    mock_response = generate_mock_response(content, mock_data)
+    
+    # Create AI message with mock response
+    ai_message = create_assistant_message(thread_id, mock_response)
     
     # Add messages to thread
     chat_threads[thread_id].messages.extend([user_message, ai_message])
     
     return [user_message, ai_message]
+
+    # Commented out actual API call for future use
+    """
+    # Get response data from external API
+    api_url = "http://100.26.118.88:5000/cypherquery"
+    payload = {"query": content}
+    response_data = get_response_data(api_url, payload)
+    """
 
 @router.get("/{thread_id}/messages/", response_model=List[Message])
 async def get_thread_messages(thread_id: str):

@@ -1,5 +1,6 @@
 from datetime import datetime
 import uuid
+from typing import Union, Dict, Any
 from models.schemas import Message
 from database.neo4j_client import neo4j_client
 from helpers.common.api_helpers import get_cypher_query
@@ -13,11 +14,11 @@ def create_user_message(thread_id: str, content: str) -> Message:
         sender="user"
     )
 
-def create_assistant_message(thread_id: str, content: str) -> Message:
+def create_assistant_message(thread_id: str, content: Union[str, Dict[str, Any]]) -> Message:
     return Message(
         id=str(uuid.uuid4()),
         thread_id=thread_id,
-        content=content,
+        content=content, 
         timestamp=datetime.now().isoformat(),
         sender="assistant"
     )

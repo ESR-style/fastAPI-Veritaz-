@@ -17,15 +17,22 @@ def generate_mock_response(user_message: str, mock_responses: dict) -> Dict:
     if "rack" in query and "si" in query:
         response = mock_responses["supply_chain_queries"]["racks_by_si"]
         return {
-            "content": f"{response['text']}\n\n{str(response['data'])}\n\n{response['followup']}"
+            "text": response['text'],
+            "data": response['data'],
+            "followup": response['followup'],
+            "type": "table"
         }
     
     if "sales" in query and "country" in query:
         response = mock_responses["supply_chain_queries"]["sales_by_country"]
         return {
-            "content": f"{response['text']}\n\n{str(response['data'])}\n\n{response['followup']}"
+            "text": response['text'],
+            "data": response['data'],
+            "followup": response['followup'],
+            "type": "table"
         }
     
     return {
-        "content": "I can help you analyze your supply chain data. Try asking questions like:\n- Show me sales by country\n- How many racks were built by SI last month?"
+        "text": "I can help you analyze your supply chain data. Try asking questions like:\n- Show me sales by country\n- How many racks were built by SI last month?",
+        "type": "text"
     }
